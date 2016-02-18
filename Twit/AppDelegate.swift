@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,7 +41,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (requestToken: BDBOAuth1Credential!) -> Void in
+                print("access token received")
+                TwitterClient.sharedInstance.requestSerializer.saveAccessToken(requestToken)
+            
+                TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil,
+                    progress: { (progress: NSProgress) -> Void in },
+                    success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                        print("user: \(response)")
+                    },
+                    failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                        print("error getting current user")
+                })
+            
+            TwitterClient.sharedInstance.GET("statuses", parameters: nil,
+                progress: { (progress: NSProgress) -> Void in },
+                success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                        print("home_timeline: \(response)")
+                },
+                failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                        print("error getting home timeline")
+            })
+            },
+            failure: { (error: NSError!) -> Void in
+                print("failed to receive access token")
+        })
+        return true
+    }
 
 }
 
