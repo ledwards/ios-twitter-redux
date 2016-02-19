@@ -5,7 +5,7 @@ use_frameworks!
 
 target 'Twit' do
     
-    pod "AFNetworking"
+    pod "AlamofireImage"
     pod "BDBOAuth1Manager"
 
 end

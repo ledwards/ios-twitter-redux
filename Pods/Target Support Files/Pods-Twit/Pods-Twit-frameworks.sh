@@ -85,9 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Twit/AFNetworking.framework"
+  install_framework "Pods-Twit/Alamofire.framework"
+  install_framework "Pods-Twit/AlamofireImage.framework"
   install_framework "Pods-Twit/BDBOAuth1Manager.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Twit/AFNetworking.framework"
+  install_framework "Pods-Twit/Alamofire.framework"
+  install_framework "Pods-Twit/AlamofireImage.framework"
   install_framework "Pods-Twit/BDBOAuth1Manager.framework"
 fi
