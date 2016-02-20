@@ -19,14 +19,14 @@ class TweetsViewController: UIViewController {
         
         tableView.dataSource = self
         
-        TwitterClient.sharedInstance.homeTimelineWithCompletion(nil) { (tweets, error) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-            print("loading timeline")
-        }
+        populateTweets()
         
         tableView.estimatedRowHeight = 85.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshCallback:", forControlEvents: .ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +37,34 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
         print("logout button pressed")
+    }
+    
+    func refreshCallback(refreshControl: UIRefreshControl) {
+        populateTweets(refreshControl)
+    }
+    
+    func populateTweets(refreshControl: UIRefreshControl? = nil) {
+        TwitterClient.sharedInstance.homeTimelineWithCompletion(nil) { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            print("loading timeline")
+            if let refreshControl = refreshControl {
+                refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var indexPath: NSIndexPath? = nil
+        if let cell = sender as? TweetCell {
+            indexPath = tableView.indexPathForCell(cell)
+            cell.selectionStyle = .Blue
+            let tweet = tweets![indexPath!.row]
+            let detailViewController = segue.destinationViewController as! DetailViewController
+            self.tableView.deselectRowAtIndexPath(indexPath!, animated: true)
+            detailViewController.tweet = tweet
+        }
+        
     }
 }
 
