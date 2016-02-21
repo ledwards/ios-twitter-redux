@@ -78,4 +78,18 @@ class TwitterClient: BDBOAuth1SessionManager {
             }
         )
     }
+    
+    func createTweetWithCompletion(params: NSDictionary, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        POST("1.1/statuses/update.json",
+            parameters: params,
+            progress: { (progress: NSProgress) -> Void in },
+            success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweet = Tweet(dictionary: response as! NSDictionary)
+                completion(tweet: tweet, error: nil)
+            },
+            failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                    print("error getting home timeline")
+                    completion(tweet: nil, error: error)
+        })
+    }
 }

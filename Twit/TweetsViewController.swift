@@ -55,16 +55,20 @@ class TweetsViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var indexPath: NSIndexPath? = nil
-        if let cell = sender as? TweetCell {
-            indexPath = tableView.indexPathForCell(cell)
-            cell.selectionStyle = .Blue
-            let tweet = tweets![indexPath!.row]
-            let detailViewController = segue.destinationViewController as! DetailViewController
-            self.tableView.deselectRowAtIndexPath(indexPath!, animated: true)
-            detailViewController.tweet = tweet
+        switch segue.identifier! {
+            case "ViewTweet":
+                var indexPath: NSIndexPath? = nil
+                if let cell = sender as? TweetCell {
+                    indexPath = tableView.indexPathForCell(cell)
+                    cell.selectionStyle = .Blue
+                    let tweet = tweets![indexPath!.row]
+                    let detailViewController = segue.destinationViewController as! DetailViewController
+                    self.tableView.deselectRowAtIndexPath(indexPath!, animated: true)
+                    detailViewController.tweet = tweet
+                }
+            default:
+                return
         }
-        
     }
 }
 
