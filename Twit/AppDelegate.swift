@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        print("receiving callback")
         TwitterClient.sharedInstance.openURL(url)
         
         return true

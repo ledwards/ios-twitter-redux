@@ -22,6 +22,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    
     @IBAction func backPressed(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -44,60 +47,68 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func retweetPressed(sender: AnyObject) {
-        self.retweetButton.setTitle("Retweet", forState: .Normal)
-        if tweet!.retweeted {
-            TwitterClient.sharedInstance.unretweetWithCompletion(tweet!.id!) {
-                (tweet, error) -> () in
-                    if let tweet = tweet {
-                        print("Unretweeted")
-                        self.tweet?.retweeted = tweet.retweeted
-                    } else {
-                        print(error?.description)
+        if let tweet = self.tweet {
+            if tweet.retweeted {
+                tweet.retweetCount--
+                TwitterClient.sharedInstance.unretweetWithCompletion(tweet.id!) {
+                    (responseTweet, error) -> () in
+                        if let _ = responseTweet {
+                            print("Unretweeted")
+                        } else {
+                            print(error?.description)
+                        }
                     }
-                }
-        } else {
-            self.retweetButton.setTitle("Unretweet", forState: .Normal)
-            TwitterClient.sharedInstance.retweetWithCompletion(tweet!.id!) {
-                (tweet, error) -> () in
-                    if let tweet = tweet {
-                        print("Retweeted")
-                        self.tweet?.retweeted = tweet.retweeted
-                    } else {
-                        print(error?.description)
+            } else {
+                tweet.retweetCount++
+                TwitterClient.sharedInstance.retweetWithCompletion(tweet.id!) {
+                    (responseTweet, error) -> () in
+                        if let _ = responseTweet {
+                            print("Retweeted")
+                        } else {
+                            print(error?.description)
+                        }
                     }
-                }
+            }
+            tweet.retweeted = !tweet.retweeted
+            redrawView()
         }
     }
     
     @IBAction func favoritePressed(sender: AnyObject) {
-        if tweet!.favorited {
-            self.favoriteButton.setTitle("Favorite", forState: .Normal)
-            TwitterClient.sharedInstance.unfavoriteWithCompletion(tweet!.id!) {
-                (tweet, error) -> () in
-                    if let tweet = tweet {
-                        print("Unfavorited")
-                        self.tweet?.favorited = tweet.favorited
-                    } else {
-                        print(error?.description)
+        if let tweet = self.tweet {
+            if tweet.favorited {
+                tweet.favoriteCount--
+                TwitterClient.sharedInstance.unfavoriteWithCompletion(tweet.id!) {
+                    (responseTweet, error) -> () in
+                        if let _ = responseTweet {
+                            print("Unfavorited")
+                        } else {
+                            print(error?.description)
+                        }
                     }
-                }
-        } else {
-            self.favoriteButton.setTitle("Unfavorite", forState: .Normal)
-            TwitterClient.sharedInstance.favoriteWithCompletion(tweet!.id!) {
-                (tweet, error) -> () in
-                    if let tweet = tweet {
-                        print("Favorited")
-                        self.tweet?.favorited = tweet.favorited
-                    } else {
-                        print(error?.description)
+            } else {
+                tweet.favoriteCount++
+                TwitterClient.sharedInstance.favoriteWithCompletion(tweet.id!) {
+                    (responseTweet, error) -> () in
+                        if let _ = responseTweet {
+                            print("Favorited")
+                            
+                        } else {
+                            print(error?.description)
+                        }
                     }
-                }
+            }
+            tweet.favorited = !tweet.favorited
+            redrawView()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        redrawView()
+    }
+    
+    func redrawView() {
         if let tweet = tweet {
             profileImageView.af_setImageWithURL(NSURL(string: (tweet.user?.profileImageURL)!)!)
             nameLabel.text = tweet.user?.name
@@ -109,6 +120,12 @@ class DetailViewController: UIViewController {
             if let replyTo = tweet.inReplyToUsername {
                 metaLabel.text = "in reply to \(replyTo)"
             }
+            
+            self.favoriteButton.setTitle(tweet.favorited ? "Unfavorite": "Favorite", forState: .Normal)
+            self.retweetButton.setTitle(tweet.retweeted ? "Unretweet": "Retweet", forState: .Normal)
+            
+            self.favoriteCountLabel.text = tweet.favoriteCount == 0 ? "" : String(tweet.favoriteCount)
+            self.retweetCountLabel.text = tweet.retweetCount == 0 ? "" : String(tweet.retweetCount)
         }
     }
     

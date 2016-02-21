@@ -24,13 +24,15 @@ class ViewController: UIViewController {
         TwitterClient.sharedInstance.loginWithCompletion() {
             (user: User?, error: NSError?) in
             if user != nil {
+                print("performing login segue")
                 self.performSegueWithIdentifier("LoginSegue", sender: self)
             } else {
                 print("login error!")
             }
         }
-        
-
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        return false
     }
 }
-
