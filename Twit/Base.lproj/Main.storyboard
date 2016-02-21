@@ -311,35 +311,35 @@
                                 </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmN-6z-jtg">
-                                <rect key="frame" x="20" y="219" width="560" height="1"/>
+                                <rect key="frame" x="0.0" y="219.5" width="600" height="0.5"/>
                                 <color key="backgroundColor" red="0.76078431369999999" green="0.78823529410000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="d7i-MO-0es"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZe-83-e6i">
-                                <rect key="frame" x="20" y="266" width="560" height="1"/>
+                                <rect key="frame" x="0.0" y="266" width="600" height="1"/>
                                 <color key="backgroundColor" red="0.76078431369999999" green="0.78823529410000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="YfV-Ve-rgk"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="629-g2-61p">
-                                <rect key="frame" x="40" y="228" width="39" height="30"/>
+                                <rect key="frame" x="20" y="228" width="39" height="30"/>
                                 <state key="normal" title="Reply"/>
                                 <connections>
                                     <action selector="replyPressed:" destination="ylX-bB-tvg" eventType="touchUpInside" id="iOn-3z-9u7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivl-oW-BRy">
-                                <rect key="frame" x="119" y="228" width="56" height="30"/>
+                                <rect key="frame" x="99" y="228" width="56" height="30"/>
                                 <state key="normal" title="Retweet"/>
                                 <connections>
                                     <action selector="retweetPressed:" destination="ylX-bB-tvg" eventType="touchUpInside" id="WTd-7a-EUe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgA-Am-zOv">
-                                <rect key="frame" x="215" y="228" width="55" height="30"/>
+                                <rect key="frame" x="195" y="228" width="55" height="30"/>
                                 <state key="normal" title="Favorite"/>
                                 <connections>
                                     <action selector="favoritePressed:" destination="ylX-bB-tvg" eventType="touchUpInside" id="34h-PM-XFB"/>
@@ -363,7 +363,7 @@
                             <constraint firstItem="ivl-oW-BRy" firstAttribute="bottom" secondItem="629-g2-61p" secondAttribute="bottom" id="Ijg-6m-Jpe"/>
                             <constraint firstItem="mSn-Iq-Hyj" firstAttribute="top" secondItem="rTO-KY-ol4" secondAttribute="bottom" constant="20" id="Jey-s2-3Ir"/>
                             <constraint firstItem="mDi-7W-fyC" firstAttribute="top" secondItem="MU9-IG-Uu0" secondAttribute="bottom" constant="-12" id="K0i-vc-Fye"/>
-                            <constraint firstItem="zZe-83-e6i" firstAttribute="leading" secondItem="4sP-Pq-GQ2" secondAttribute="leadingMargin" id="LfY-Je-tzz"/>
+                            <constraint firstItem="zZe-83-e6i" firstAttribute="leading" secondItem="4sP-Pq-GQ2" secondAttribute="leading" id="LfY-Je-tzz"/>
                             <constraint firstItem="FO6-7o-Yk6" firstAttribute="top" secondItem="MU9-IG-Uu0" secondAttribute="top" id="MG6-dB-A7K"/>
                             <constraint firstItem="MU9-IG-Uu0" firstAttribute="top" secondItem="mSn-Iq-Hyj" secondAttribute="bottom" constant="10" id="P0e-SA-Od3"/>
                             <constraint firstItem="mDi-7W-fyC" firstAttribute="leading" secondItem="4sP-Pq-GQ2" secondAttribute="leadingMargin" id="RIn-z0-mZD"/>
@@ -371,14 +371,15 @@
                             <constraint firstItem="OhA-q6-Njz" firstAttribute="leading" secondItem="mDi-7W-fyC" secondAttribute="leading" id="T7S-CR-RCR"/>
                             <constraint firstItem="OhA-q6-Njz" firstAttribute="top" secondItem="mDi-7W-fyC" secondAttribute="bottom" constant="8" id="TcQ-L5-sEv"/>
                             <constraint firstItem="FO6-7o-Yk6" firstAttribute="leading" secondItem="MU9-IG-Uu0" secondAttribute="trailing" constant="8" id="aHc-pA-8kq"/>
-                            <constraint firstItem="KmN-6z-jtg" firstAttribute="leading" secondItem="4sP-Pq-GQ2" secondAttribute="leadingMargin" id="ab4-Ag-MOY"/>
+                            <constraint firstItem="KmN-6z-jtg" firstAttribute="leading" secondItem="4sP-Pq-GQ2" secondAttribute="leading" id="ab4-Ag-MOY"/>
                             <constraint firstItem="629-g2-61p" firstAttribute="top" secondItem="KmN-6z-jtg" secondAttribute="bottom" constant="8" id="e4V-zf-z9I"/>
                             <constraint firstItem="NgA-Am-zOv" firstAttribute="leading" secondItem="ivl-oW-BRy" secondAttribute="trailing" constant="40" id="hx2-Nb-3eo"/>
                             <constraint firstItem="wWv-xq-akO" firstAttribute="leading" secondItem="FO6-7o-Yk6" secondAttribute="leading" id="jC6-df-fL8"/>
                             <constraint firstItem="ivl-oW-BRy" firstAttribute="leading" secondItem="629-g2-61p" secondAttribute="trailing" constant="40" id="lGR-7q-u2h"/>
                             <constraint firstItem="NgA-Am-zOv" firstAttribute="baseline" secondItem="ivl-oW-BRy" secondAttribute="baseline" id="muF-VP-D2J"/>
                             <constraint firstItem="zZe-83-e6i" firstAttribute="top" secondItem="KmN-6z-jtg" secondAttribute="bottom" constant="40" id="n6q-w2-MKY"/>
-                            <constraint firstItem="zZe-83-e6i" firstAttribute="trailing" secondItem="4sP-Pq-GQ2" secondAttribute="trailingMargin" id="rh3-uc-edm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KmN-6z-jtg" secondAttribute="trailing" constant="-20" id="oXF-r8-e1r"/>
+                            <constraint firstItem="zZe-83-e6i" firstAttribute="trailing" secondItem="4sP-Pq-GQ2" secondAttribute="trailing" id="rh3-uc-edm"/>
                             <constraint firstItem="629-g2-61p" firstAttribute="leading" secondItem="KmN-6z-jtg" secondAttribute="leading" constant="20" id="snr-iU-X8B"/>
                             <constraint firstItem="FO6-7o-Yk6" firstAttribute="baseline" secondItem="OhA-q6-Njz" secondAttribute="baseline" id="tpW-Yr-y95"/>
                             <constraint firstItem="KmN-6z-jtg" firstAttribute="top" secondItem="OhA-q6-Njz" secondAttribute="bottom" constant="7.5" id="txY-CV-M0l"/>
@@ -400,6 +401,7 @@
                                 <exclude reference="x8y-UT-iDc"/>
                                 <exclude reference="8af-KJ-0Yg"/>
                                 <exclude reference="vJ0-Lv-i6z"/>
+                                <exclude reference="EHo-fW-3c6"/>
                                 <exclude reference="n6q-w2-MKY"/>
                             </mask>
                         </variation>

@@ -40,9 +40,27 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func retweetPressed(sender: AnyObject) {
+        TwitterClient.sharedInstance.retweetWithCompletion(tweet!.id!) {
+            (tweet, error) -> () in
+                if tweet != nil {
+                    print("Retweeted")
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    print(error?.description)
+                }
+            }
     }
     
     @IBAction func favoritePressed(sender: AnyObject) {
+        TwitterClient.sharedInstance.favoriteWithCompletion(tweet?.id!) {
+            (tweet, error) -> () in
+                if tweet != nil {
+                    print("Favorited")
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    print(error?.description)
+                }
+            }
     }
     
     override func viewDidLoad() {
