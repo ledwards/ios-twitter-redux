@@ -329,6 +329,7 @@
                                 <state key="normal" title="Reply"/>
                                 <connections>
                                     <action selector="replyPressed:" destination="ylX-bB-tvg" eventType="touchUpInside" id="iOn-3z-9u7"/>
+                                    <action selector="retweetPressed:" destination="ylX-bB-tvg" eventType="touchUpInside" id="wep-q6-k01"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivl-oW-BRy">
@@ -420,9 +421,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="mDi-7W-fyC" id="FYB-W7-qm3"/>
+                        <outlet property="favoriteButton" destination="NgA-Am-zOv" id="XOi-jf-dXD"/>
                         <outlet property="metaLabel" destination="mSn-Iq-Hyj" id="I2V-QK-TFi"/>
                         <outlet property="nameLabel" destination="FO6-7o-Yk6" id="uRu-F6-pbi"/>
                         <outlet property="profileImageView" destination="MU9-IG-Uu0" id="Rwe-d7-uBx"/>
+                        <outlet property="replyButton" destination="629-g2-61p" id="YWK-2e-9c9"/>
+                        <outlet property="retweetButton" destination="ivl-oW-BRy" id="JrF-vb-H8d"/>
                         <outlet property="timestampLabel" destination="OhA-q6-Njz" id="oFp-M5-NJg"/>
                         <outlet property="usernameLabel" destination="wWv-xq-akO" id="MJ5-c3-ybg"/>
                     </connections>

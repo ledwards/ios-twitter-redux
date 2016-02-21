@@ -18,6 +18,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var metaLabel: UILabel!
     
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     @IBAction func backPressed(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -40,27 +44,55 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func retweetPressed(sender: AnyObject) {
-        TwitterClient.sharedInstance.retweetWithCompletion(tweet!.id!) {
-            (tweet, error) -> () in
-                if tweet != nil {
-                    print("Retweeted")
-                    self.navigationController?.popViewControllerAnimated(true)
-                } else {
-                    print(error?.description)
+        self.retweetButton.setTitle("Retweet", forState: .Normal)
+        if tweet!.retweeted {
+            TwitterClient.sharedInstance.unretweetWithCompletion(tweet!.id!) {
+                (tweet, error) -> () in
+                    if let tweet = tweet {
+                        print("Unretweeted")
+                        self.tweet?.retweeted = tweet.retweeted
+                    } else {
+                        print(error?.description)
+                    }
                 }
-            }
+        } else {
+            self.retweetButton.setTitle("Unretweet", forState: .Normal)
+            TwitterClient.sharedInstance.retweetWithCompletion(tweet!.id!) {
+                (tweet, error) -> () in
+                    if let tweet = tweet {
+                        print("Retweeted")
+                        self.tweet?.retweeted = tweet.retweeted
+                    } else {
+                        print(error?.description)
+                    }
+                }
+        }
     }
     
     @IBAction func favoritePressed(sender: AnyObject) {
-        TwitterClient.sharedInstance.favoriteWithCompletion(tweet?.id!) {
-            (tweet, error) -> () in
-                if tweet != nil {
-                    print("Favorited")
-                    self.navigationController?.popViewControllerAnimated(true)
-                } else {
-                    print(error?.description)
+        if tweet!.favorited {
+            self.favoriteButton.setTitle("Favorite", forState: .Normal)
+            TwitterClient.sharedInstance.unfavoriteWithCompletion(tweet!.id!) {
+                (tweet, error) -> () in
+                    if let tweet = tweet {
+                        print("Unfavorited")
+                        self.tweet?.favorited = tweet.favorited
+                    } else {
+                        print(error?.description)
+                    }
                 }
-            }
+        } else {
+            self.favoriteButton.setTitle("Unfavorite", forState: .Normal)
+            TwitterClient.sharedInstance.favoriteWithCompletion(tweet!.id!) {
+                (tweet, error) -> () in
+                    if let tweet = tweet {
+                        print("Favorited")
+                        self.tweet?.favorited = tweet.favorited
+                    } else {
+                        print(error?.description)
+                    }
+                }
+        }
     }
     
     override func viewDidLoad() {
