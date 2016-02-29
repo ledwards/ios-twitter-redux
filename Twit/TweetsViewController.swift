@@ -155,6 +155,13 @@ class TweetsViewController: UIViewController {
                 return
         }
     }
+    
+    @IBAction func onTapImage(sender: AnyObject) {
+        let tweet = tweets![sender.view!!.tag]
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController!
+        navigationController?.pushViewController(vc, animated: true)
+        vc.user = tweet.user
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource {
@@ -178,6 +185,7 @@ extension TweetsViewController: UITableViewDataSource {
             cell.replyButton.tag = indexPath.row
             cell.retweetButton.tag = indexPath.row
             cell.favoriteButton.tag = indexPath.row
+            cell.imageView!.tag = indexPath.row
         }
         
         return cell

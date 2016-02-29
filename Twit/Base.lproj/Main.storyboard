@@ -75,7 +75,7 @@
                             <constraint firstItem="m7V-Y6-Fv1" firstAttribute="leading" secondItem="QI7-7c-j4a" secondAttribute="leading" id="YFH-jV-cs6"/>
                             <constraint firstItem="X3d-Xs-BVr" firstAttribute="top" secondItem="QI7-7c-j4a" secondAttribute="bottom" id="e65-Dp-ue4"/>
                             <constraint firstItem="QI7-7c-j4a" firstAttribute="leading" secondItem="wYf-jm-PE4" secondAttribute="leading" id="ni1-eH-4vv"/>
-                            <constraint firstItem="m7V-Y6-Fv1" firstAttribute="width" secondItem="QI7-7c-j4a" secondAttribute="width" id="rIz-Tx-JX3"/>
+                            <constraint firstItem="m7V-Y6-Fv1" firstAttribute="width" secondItem="wYf-jm-PE4" secondAttribute="width" id="vGq-Uu-Jv9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -162,12 +162,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="527" height="136.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-Dp-OkZ">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-Dp-OkZ">
                                                     <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="1Ar-L6-T9D"/>
                                                         <constraint firstAttribute="width" constant="40" id="XiM-wA-BkJ"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="lB9-6O-z1d" appends="YES" id="AXw-iP-6gm"/>
+                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gj-CJ-yzz">
                                                     <rect key="frame" x="56" y="8" width="48" height="20.5"/>
@@ -317,6 +321,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x91-RM-Bf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="lB9-6O-z1d">
+                    <connections>
+                        <action selector="onTapImage:" destination="YMN-KK-moO" id="wt5-qF-tTo"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2137" y="305"/>
         </scene>

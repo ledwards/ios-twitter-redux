@@ -23,6 +23,7 @@ class MenuViewController: UIViewController {
         let tnc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! TweetsNavigationController
         let mnc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! TweetsNavigationController
         let pnc = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! ProfileNavigationController
+        
         viewControllers.append(tnc)
         viewControllers.append(mnc)
         viewControllers.append(pnc)
@@ -36,13 +37,13 @@ class MenuViewController: UIViewController {
         let pvc = pnc.viewControllers[0] as! ProfileViewController
         pvc.user = User.currentUser
         
-//        hamburgerViewController.contentViewController = viewControllers[0]
-        
         tableView.estimatedRowHeight = 32.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor(red: CGFloat(85.0/255.0), green: CGFloat(172.0/255.0), blue: CGFloat(238.0/255.0), alpha: CGFloat(1.0))
+        
+        hamburgerViewController.contentViewController = tnc
     }
 
     override func didReceiveMemoryWarning() {
