@@ -42,8 +42,6 @@ class MenuViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor(red: CGFloat(85.0/255.0), green: CGFloat(172.0/255.0), blue: CGFloat(238.0/255.0), alpha: CGFloat(1.0))
-        
-        hamburgerViewController.contentViewController = tnc
     }
 
     override func didReceiveMemoryWarning() {
