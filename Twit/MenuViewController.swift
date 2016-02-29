@@ -20,12 +20,22 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tvc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
-        let mvc = storyboard.instantiateViewControllerWithIdentifier("MentionsNavigationController")
-        let pvc = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
-        viewControllers.append(tvc)
-        viewControllers.append(mvc)
-        viewControllers.append(pvc)
+        let tnc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! TweetsNavigationController
+        let mnc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! TweetsNavigationController
+        let pnc = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! ProfileNavigationController
+        viewControllers.append(tnc)
+        viewControllers.append(mnc)
+        viewControllers.append(pnc)
+        
+        let tvc = tnc.viewControllers[0] as! TweetsViewController
+        tvc.mentions = false
+        
+        let mvc = mnc.viewControllers[0] as! TweetsViewController
+        mvc.mentions = true
+        
+        let pvc = pnc.viewControllers[0] as! ProfileViewController
+        pvc.user = User.currentUser
+        
 //        hamburgerViewController.contentViewController = viewControllers[0]
         
         tableView.estimatedRowHeight = 32.0

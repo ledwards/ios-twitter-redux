@@ -13,11 +13,10 @@ class TweetsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]?
+    var mentions: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("loading TweetsViewController")
         
         tableView.dataSource = self
         
@@ -113,10 +112,27 @@ class TweetsViewController: UIViewController {
     }
     
     func populateTweets(refreshControl: UIRefreshControl? = nil) {
+        if (self.mentions == true) {
+            populateMentionsTweets()
+        } else {
+            populateHomeTweets()
+        }
+    }
+    
+    func populateHomeTweets(refreshControl: UIRefreshControl? = nil) {
         TwitterClient.sharedInstance.homeTimelineWithCompletion(nil) { (tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
-            print("loading timeline")
+            if let refreshControl = refreshControl {
+                refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    func populateMentionsTweets(refreshControl: UIRefreshControl? = nil) {
+        TwitterClient.sharedInstance.mentionsTimelineWithCompletion(nil) { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
             if let refreshControl = refreshControl {
                 refreshControl.endRefreshing()
             }
